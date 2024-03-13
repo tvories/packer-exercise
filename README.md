@@ -2,6 +2,8 @@
 
 This is an example repo for building a Windows image using Packer ang GCP. You don't have to actually run these commands if you don't have the ability to create your own Google Cloud project, but the instructions are here if you would like to try to build this.
 
+Helpful documentation: https://developer.hashicorp.com/packer/integrations/hashicorp/googlecompute/latest/components/builder/googlecompute
+
 ## Your Job
 
 Read through the [`customization.ps1`](./customization.ps1) file for instructions. There are at the top of the file, commented out. Follow the instructions and save your changes. You can try building in GCP with packer if you would like, but it's not a requirement.
