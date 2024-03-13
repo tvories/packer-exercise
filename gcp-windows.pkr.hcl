@@ -9,7 +9,7 @@ packer {
 
 variable "project_id" {
   type = string
-  default = "taylor-cloud"
+  description = "The Google project ID where you want to build the packer image."
 }
 
 variable "zone" {
