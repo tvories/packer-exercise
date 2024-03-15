@@ -4,6 +4,11 @@
 # 3. Restart the IIS Service once configuration is complete
 # This script handles parts of the configuration. You can modify it however you would like.
 
+## Variables
+$webAppName = "MyWebApp"
+$newWebSiteRoot = "C:\inetpub\wwwroot\MyWebApp"
+$webContent = "<xml>I am XML configuration</xml>"
+
 # Install the IIS Windows Feature
 Install-WindowsFeature -Name Web-Server -IncludeManagementTools -Verbose
 # Install ASP.net45
@@ -14,24 +19,20 @@ Remove-IISSite -Name 'Default Web Site' -Confirm:$False
 
 # Create a directory for our web application
 # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/new-item?view=powershell-7.4#example-4-create-a-directory-in-a-different-directory
-#TODO: Write the powershell to create a directory at C:\inetpub\wwwroot\MyWebApp
-New-Item -ItemType "directory" -Path C:\inetpub\wwwroot\MyWebApp
+New-Item -ItemType "directory" -Path $newWebSiteRoot
 Write-Host "Web app directory created!"
 
 # Configure the new website for IIS
-#TODO: Implement me!
 # https://learn.microsoft.com/en-us/powershell/module/webadministration/new-website?view=windowsserver2022-ps
-New-Website -Name "MyWebApp" -Port 80 -PhysicalPath "C:\inetpub\wwwroot\MyWebApp"
+New-Website -Name $webAppName -Port 80 -PhysicalPath $newWebSiteRoot
 Write-Host "Webroot configured for the created folder path!"
 
 # Create a file called configuration.xml in the C:\inetpub\wwwroot\MyWebApp directory
-# TODO: Implement me!
 # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/set-content?view=powershell-7.4
-Set-Content -Path C:\inetpub\wwwroot\MyWebApp\configuration.xml -Value "<xml>I am XML configuration</xml>"
+Set-Content -Path C:\inetpub\wwwroot\MyWebApp\configuration.xml -Value $webContent
 Write-Host "Content written to configuration.xml file"
 
 # Restart the IIS Service
-# TODO: Implement me!
 # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/restart-service?view=powershell-7.4
-Restart-Service -Name Web-Server
+Restart-Service W3SVC
 Write-Host "IIS server restarted, new content should be displayed! if not check your web-server config!"
