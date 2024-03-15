@@ -21,6 +21,12 @@ variable "zone" {
 //   type = string
 // }
 
+/*
+1. Use compute engine service account for dev projects, create a separate account for prod with less access as best practice
+2. pull the temp password from GCP secrets manager via data source instead of hardcoding
+3. Assign labels for organization and use spot for cheap build or low priority builds
+*/
+
 source "googlecompute" "davita_windows" {
   project_id                  = var.project_id
   source_image_family         = "windows-2022"
